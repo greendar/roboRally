@@ -1,34 +1,75 @@
 import pygame
-
-def rot_center(image, angle): # not sure if this works
-    """rotate an image while keeping its center"""
-    rot_image = pygame.transform.rotate(image, angle)
-    return rot_image
-
+import robot
 
 pygame.init()
 
 windowSize = [500, 500]
 screen = pygame.display.set_mode(windowSize)
 gameBoard = pygame.image.load('graphics/2016doodle.jpg')
-robot1 = pygame.image.load('graphics/UglyBot 2000.png')
+robot1 = robot.Robot('Lloyd', 0, 0)
+robot1.img = pygame.image.load('graphics/UR1.png')
 screen.blit(gameBoard, (0, 0))
-screen.blit(robot1, (0, 0))
-
-
+screen.blit(robot1.img, (robot1.x, robot1.y))
 
 done = False
+keyPressed = False
 
 while not done:
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_u]: # does go into code when u is pushed
-        rot_center(robot1, 90)
-        screen.blit(robot1, (0, 0))
+    if keys[pygame.K_i] and not keyPressed:
+        keyPressed = True
+        robot1.moveUp()
+        screen.blit(gameBoard, (0, 0))
+        screen.blit(robot1.img, (robot1.x, robot1.y))
+        print(robot1.x, robot1.y, robot1.dir)  # get rid of this
+
+    if keys[pygame.K_j] and not keyPressed:
+        keyPressed = True
+        robot1.moveLeft()
+        screen.blit(gameBoard, (0, 0))
+        screen.blit(robot1.img, (robot1.x, robot1.y))
+        print(robot1.x, robot1.y, robot1.dir)  # get rid of this
+
+    if keys[pygame.K_k] and not keyPressed:
+        keyPressed = True
+        robot1.moveDown()
+        screen.blit(gameBoard, (0, 0))
+        screen.blit(robot1.img, (robot1.x, robot1.y))
+        print(robot1.x, robot1.y, robot1.dir)  # get rid of this
+
+    if keys[pygame.K_l] and not keyPressed:
+        keyPressed = True
+        robot1.moveRight()
+        screen.blit(gameBoard, (0, 0))
+        screen.blit(robot1.img, (robot1.x, robot1.y))
+        print(robot1.x, robot1.y, robot1.dir)  # get rid of this
+
+    if keys[pygame.K_u] and not keyPressed:
+        keyPressed = True
+        robot1.turnLeft()
+        robot1.img = pygame.image.load(f"graphics/UR{str(robot1.dir)}.png")
+        screen.blit(gameBoard, (0, 0))
+        screen.blit(robot1.img, (robot1.x, robot1.y))
+        print(robot1.x, robot1.y, robot1.dir)  # get rid of this
+
+    if keys[pygame.K_o] and not keyPressed:
+        keyPressed = True
+        robot1.turnRight()
+        robot1.img = pygame.image.load(f"graphics/UR{str(robot1.dir)}.png")
+        screen.blit(gameBoard, (0, 0))
+        screen.blit(robot1.img, (robot1.x, robot1.y))
+        print(robot1.x, robot1.y, robot1.dir)  # get rid of this
+
+# check for off the board 460
+
+    if keyPressed and event.type == pygame.KEYUP:
+        keyPressed = False
+
+    pygame.display.flip()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-    pygame.display.flip()
 
 
 pygame.quit()
