@@ -5,9 +5,14 @@ class Robot:
         self.y = y
         self.dir = dir
         self.img = None
+        self.moveMult = 0
 
     def nameFile(self):
         return f"UR{str(self.dir)}.png"
+
+    def setMoveMult(self, gridSize):
+        self.moveMult = gridSize
+
 
     def turnLeft(self):
         self.dir -=1
@@ -20,16 +25,16 @@ class Robot:
             self.dir = 0
 
     def moveRight(self):
-        self.x += 46
+        self.x += self.moveMult
 
     def moveDown(self):
-        self.y += 46
+        self.y += self.moveMult
 
     def moveLeft(self):
-        self.x -= 46
+        self.x -= self.moveMult
 
     def moveUp(self):
-        self.y -= 46
+        self.y -= self.moveMult
 
 if __name__ == "__main__":
     r2d2 = Robot('R2D2')

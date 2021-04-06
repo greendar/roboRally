@@ -1,3 +1,5 @@
+import random  # put in the init for deck
+
 """
 move represents type of move
     f = forward
@@ -31,6 +33,10 @@ class Deck:
     def printDeck(self):
         for card in self.cardList:
             print(card.priority, card.move, card.amount)
+
+    def getCard(self):  # does it work?
+        return self.cardList.pop()
+
 
 
 
