@@ -36,6 +36,34 @@ class Robot:
     def moveUp(self):
         self.y -= self.moveMult
 
+    def moveFwd(self, amount): # **********************
+        if self.dir == 0:
+            for i in range(amount):
+                self.moveUp()
+        if self.dir == 1:
+            for i in range(amount):
+                self.moveRight()
+        if self.dir == 2:
+            for i in range(amount):
+                self.moveDown()
+        if self.dir == 3:
+            for i in range(amount):
+                self.moveLeft()
+
+    def moveBack(self, amount = 1):
+        if self.dir == 2:
+            for i in range(amount):
+                self.moveUp()
+        if self.dir == 3:
+            for i in range(amount):
+                self.moveRight()
+        if self.dir == 0:
+            for i in range(amount):
+                self.moveDown()
+        if self.dir == 1:
+            for i in range(amount):
+                self.moveLeft()
+
 if __name__ == "__main__":
     r2d2 = Robot('R2D2')
 

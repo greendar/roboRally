@@ -1,5 +1,6 @@
 import pygame
 import robot
+import cards
 
 pygame.init()
 
@@ -18,15 +19,17 @@ gameBoard = pygame.transform.scale(gameBoard, (1000, 1000))
 robot1 = robot.Robot('Lloyd', 0, 0)
 robot1.setMoveMult(gridXsize)  # int is not callable
 robot1.img = pygame.image.load('graphics/UR1.png')
+robot1.img = pygame.transform.scale(robot1.img, (84, 84))
 screen.blit(gameBoard, (0, 0))
 screen.blit(robot1.img, (robot1.x, robot1.y))
+d = cards.Deck()
 
 done = False
 keyPressed = False
 
 while not done:
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_i] and not keyPressed:
+    if keys[pygame.K_i] and robot1.dir == 0 and not keyPressed:
         keyPressed = True
         if robot1.y > 0:
             robot1.moveUp()
@@ -34,7 +37,7 @@ while not done:
             screen.blit(robot1.img, (robot1.x, robot1.y))
         print(robot1.x, robot1.y, robot1.dir)  # get rid of this
 
-    if keys[pygame.K_j] and not keyPressed:
+    if keys[pygame.K_j] and robot1.dir == 3 and not keyPressed:
         keyPressed = True
         if robot1.x > 0:
             robot1.moveLeft()
@@ -42,7 +45,7 @@ while not done:
             screen.blit(robot1.img, (robot1.x, robot1.y))
         print(robot1.x, robot1.y, robot1.dir)  # get rid of this
 
-    if keys[pygame.K_k] and not keyPressed:
+    if keys[pygame.K_k] and robot1.dir == 2 and not keyPressed:
         keyPressed = True
         if robot1.y < maxY - 40:
             robot1.moveDown()
@@ -50,7 +53,7 @@ while not done:
             screen.blit(robot1.img, (robot1.x, robot1.y))
         print(robot1.x, robot1.y, robot1.dir)  # get rid of this
 
-    if keys[pygame.K_l] and not keyPressed:
+    if keys[pygame.K_l] and robot1.dir == 1 and not keyPressed:
         keyPressed = True
         if robot1.x < maxX - 40:
             robot1.moveRight()
@@ -62,6 +65,7 @@ while not done:
         keyPressed = True
         robot1.turnLeft()
         robot1.img = pygame.image.load(f"graphics/UR{str(robot1.dir)}.png")
+        robot1.img = pygame.transform.scale(robot1.img, (84, 84))
         screen.blit(gameBoard, (0, 0))
         screen.blit(robot1.img, (robot1.x, robot1.y))
         print(robot1.x, robot1.y, robot1.dir)  # get rid of this
@@ -70,11 +74,16 @@ while not done:
         keyPressed = True
         robot1.turnRight()
         robot1.img = pygame.image.load(f"graphics/UR{str(robot1.dir)}.png")
+        robot1.img = pygame.transform.scale(robot1.img, (84, 84))
         screen.blit(gameBoard, (0, 0))
         screen.blit(robot1.img, (robot1.x, robot1.y))
         print(robot1.x, robot1.y, robot1.dir)  # get rid of this
 
 # check for off the board 460
+    c = d.getCard()
+    c.applyCard(robot1)
+
+
 
     if keyPressed and event.type == pygame.KEYUP:
         keyPressed = False

@@ -15,6 +15,24 @@ class Card:
         self.move = move
         self.amount = amount
 
+
+    def __str__(self):
+        return f"{self.move}, {self.amount}"
+
+# **************** Test Code
+    def applyCard(self, robotN):
+        if self.move == 'f':
+            robotN.moveFwd(self.amount)
+
+        if self.move == 'b':
+            pass
+
+        if self.move == 'l':
+            pass
+
+# **************** Test Code
+
+
 class Deck:
     def shuffleList(self):
         myDeck = []
@@ -30,6 +48,7 @@ class Deck:
     def __init__(self):
         self.cardList = self.shuffleList()
 
+
     def printDeck(self):
         for card in self.cardList:
             print(card.priority, card.move, card.amount)
@@ -40,7 +59,7 @@ class Deck:
 
 
 
-
-d = Deck()
-d.shuffleList()
-d.printDeck()
+if __name__ == "__main__":
+    d = Deck()
+    d.shuffleList()
+    print(d.getCard())
