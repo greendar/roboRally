@@ -80,8 +80,13 @@ while not done:
         print(robot1.x, robot1.y, robot1.dir)  # get rid of this
 
 # check for off the board 460
-    c = d.getCard()
-    c.applyCard(robot1)
+
+    if keys[pygame.K_d] and not keyPressed:
+        keyPressed = True
+        c = d.getCard()
+        print(c)
+        c.applyCard(robot1)
+
 
 
 
@@ -93,6 +98,7 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
+
 
 
 pygame.quit()

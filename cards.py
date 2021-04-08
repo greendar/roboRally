@@ -1,4 +1,4 @@
-import random  # put in the init for deck
+import random
 
 """
 move represents type of move
@@ -22,7 +22,8 @@ class Card:
 # **************** Test Code
     def applyCard(self, robotN):
         if self.move == 'f':
-            robotN.moveFwd(self.amount)
+            print(self.amount) # ****************
+            robotN.moveFwd(int(self.amount))
 
         if self.move == 'b':
             pass
@@ -42,6 +43,7 @@ class Deck:
             priority, move, amount = line.split(', ')
             newCard = Card(priority, move, amount)
             myDeck.append(newCard)
+            random.shuffle(myDeck)
         return myDeck
 
 

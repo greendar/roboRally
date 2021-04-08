@@ -37,10 +37,12 @@ class Robot:
         self.y -= self.moveMult
 
     def moveFwd(self, amount): # **********************
+        print("MoveFWD called", self.dir, type(amount))
         if self.dir == 0:
             for i in range(amount):
                 self.moveUp()
         if self.dir == 1:
+            print('is this called')
             for i in range(amount):
                 self.moveRight()
         if self.dir == 2:
